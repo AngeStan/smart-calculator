@@ -6,17 +6,15 @@ root.title(f'Smart Calculator {version}')
 # root.iconbitmap('')
 root.geometry('300x300')
 
-# TODO sidebar to choose the Calculator template
-
 frame_input = Frame(root)
-expression = Label(frame_input, text='Exp: 3434 + 56 / 5 =', anchor='e', justify=RIGHT)
-expression.pack()
+frame_keys = Frame(root)
+frame_operators = Frame(root)
+
+label_expression = Label(frame_input, anchor='e', justify=RIGHT)
+label_expression.pack()
 entry = Entry(frame_input, justify=RIGHT)
 entry.pack(side=BOTTOM)
 frame_input.pack()
-
-frame_keys = Frame(root)
-frame_operators = Frame(root)
 
 # button functions
 def AddToExp(num):
@@ -31,6 +29,7 @@ def ButtonClear():
 
 
 def ButtonEqual():
+    label_expression.configure(text=entry.get())
     result = eval(entry.get())
     entry.delete(0, END)
     entry.insert(0, result)
