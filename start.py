@@ -8,13 +8,12 @@ root.geometry('300x300')
 
 # TODO sidebar to choose the Calculator template
 
-frame_inpout = Frame(root)
-
-expression = Label(frame_inpout, text='Exp: 3434 + 56 / 5 =', anchor='e', justify=RIGHT)
+frame_input = Frame(root)
+expression = Label(frame_input, text='Exp: 3434 + 56 / 5 =', anchor='e', justify=RIGHT)
 expression.pack()
-entry = Entry(frame_inpout, justify=RIGHT)
+entry = Entry(frame_input, justify=RIGHT)
 entry.pack(side=BOTTOM)
-frame_inpout.pack()
+frame_input.pack()
 
 frame_keys = Frame(root)
 frame_operators = Frame(root)
@@ -30,13 +29,11 @@ def ButtonClear():
     entry.delete(0, END)
 
 
-def ButtonPlus():
-    pass
-
 
 def ButtonEqual():
-    pass
-
+    result = eval(entry.get())
+    entry.delete(0, END)
+    entry.insert(0, result)
 
 
 # define buttons
@@ -54,7 +51,7 @@ button_plus = Button(frame_operators, text="+", padx=10, pady=10, command=lambda
 button_minus = Button(frame_operators, text="-", padx=10, pady=10, command=lambda: AddToExp('-'))
 button_times = Button(frame_operators, text="X", padx=10, pady=10, command=lambda: AddToExp('*'))
 button_div = Button(frame_operators, text="/", padx=10, pady=10, command=lambda: AddToExp('/'))
-button_equal = Button(frame_keys, text="=", padx=10, pady=10, command=ButtonEqual)
+button_equal = Button(frame_operators, text="=", padx=10, pady=10, command=ButtonEqual)
 button_clear = Button(frame_keys, text="Clear", padx=10, pady=10, command=ButtonClear)
 
 # render the buttons on the screen
@@ -74,7 +71,7 @@ button_times.grid(row=1, column=0)
 button_minus.grid(row=2, column=0)
 button_plus.grid(row=3, column=0)
 # button_clear.grid(row=4, column=1, columnspan=2)
-# button_equal.grid(row=5, column=1, columnspan=2)
+button_equal.grid(row=4, column=0)
 
 frame_keys.pack(side=LEFT)
 frame_operators.pack(side=LEFT)
