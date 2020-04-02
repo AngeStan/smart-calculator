@@ -20,14 +20,13 @@ operators = ('+','-','*','/')
 # button functions
 def AddToExp(element):
     current = entry.get()
-    if current.endswith(operators):
-        print(current[-1])
-        # current = current[:-1] + element
-        entry.delete(END, END)
-        entry.insert(END, element)
+    entry.delete(0, END)
+    if current.endswith(operators) and element in operators:
+        print(current[-1] + element)
+        current = current[:-1] + element
+        entry.insert(END, current)
     else:
         # current = entry.get()
-        entry.delete(0, END)
         entry.insert(END, str(current) + str(element))
 
 
