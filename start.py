@@ -16,11 +16,23 @@ label_expression.pack()
 entry = Entry(frame_input, justify=RIGHT)
 entry.pack(side=BOTTOM)
 
+operators = ('+','-','*','/')
 # button functions
-def AddToExp(num):
+def AddToExp(element):
     current = entry.get()
-    entry.delete(0, END)
-    entry.insert(0, str(current) + str(num))
+    if current.endswith(operators):
+        print(current[-1])
+        # current = current[:-1] + element
+        entry.delete(END, END)
+        entry.insert(END, element)
+    else:
+        # current = entry.get()
+        entry.delete(0, END)
+        entry.insert(END, str(current) + str(element))
+
+
+def SelectOperator(operator):
+    entry.replace(END, END, operator)
 
 
 # def ButtonClear():
@@ -28,7 +40,7 @@ def AddToExp(num):
 
 
 
-def ButtonEqual():
+def Equal():
     label_expression.configure(text=entry.get())
     result = eval(entry.get())
     entry.delete(0, END)
@@ -52,8 +64,9 @@ button_plus = Button(frame_operators, text="+", padx=10, pady=10, command=lambda
 button_minus = Button(frame_operators, text="-", padx=10, pady=10, command=lambda: AddToExp('-'))
 button_times = Button(frame_operators, text="X", padx=10, pady=10, command=lambda: AddToExp('*'))
 button_div = Button(frame_operators, text="/", padx=10, pady=10, command=lambda: AddToExp('/'))
-button_equal = Button(frame_operators, text="=", padx=10, pady=10, command=ButtonEqual)
+button_equal = Button(frame_operators, text="=", padx=10, pady=10, command=Equal)
 button_clear = Button(frame_functions, text="CE", padx=10, pady=10, command=lambda: entry.delete(0, END))
+button_clear = Button(frame_functions, text="C", padx=10, pady=10, command=lambda: entry.delete(0, END))
 
 # render the buttons on the screen
 button_clear.grid(row=0, column=0)
