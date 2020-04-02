@@ -9,12 +9,12 @@ root.geometry('300x300')
 frame_input = Frame(root)
 frame_keys = Frame(root)
 frame_operators = Frame(root)
+frame_functions = Frame(root)
 
 label_expression = Label(frame_input, anchor='e', justify=RIGHT)
 label_expression.pack()
 entry = Entry(frame_input, justify=RIGHT)
 entry.pack(side=BOTTOM)
-frame_input.pack()
 
 # button functions
 def AddToExp(num):
@@ -23,8 +23,8 @@ def AddToExp(num):
     entry.insert(0, str(current) + str(num))
 
 
-def ButtonClear():
-    entry.delete(0, END)
+# def ButtonClear():
+#     entry.delete(0, END)
 
 
 
@@ -53,9 +53,11 @@ button_minus = Button(frame_operators, text="-", padx=10, pady=10, command=lambd
 button_times = Button(frame_operators, text="X", padx=10, pady=10, command=lambda: AddToExp('*'))
 button_div = Button(frame_operators, text="/", padx=10, pady=10, command=lambda: AddToExp('/'))
 button_equal = Button(frame_operators, text="=", padx=10, pady=10, command=ButtonEqual)
-button_clear = Button(frame_keys, text="Clear", padx=10, pady=10, command=ButtonClear)
+button_clear = Button(frame_functions, text="CE", padx=10, pady=10, command=lambda: entry.delete(0, END))
 
 # render the buttons on the screen
+button_clear.grid(row=0, column=0)
+
 buttons_7.grid(row=0, column=0)
 buttons_8.grid(row=0, column=1)
 buttons_9.grid(row=0, column=2)
@@ -73,9 +75,11 @@ button_div.grid(row=0, column=0)
 button_times.grid(row=1, column=0)
 button_minus.grid(row=2, column=0)
 button_plus.grid(row=3, column=0)
-# button_clear.grid(row=4, column=1, columnspan=2)
 button_equal.grid(row=4, column=0)
 
+#frames' positions
+frame_input.pack()
+frame_functions.pack()
 frame_keys.pack(side=LEFT)
 frame_operators.pack(side=LEFT)
 
